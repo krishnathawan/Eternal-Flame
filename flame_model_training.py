@@ -14,4 +14,17 @@ results = model.train(
 # Save the trained model
 model.save('trained_flame_detection_model.pt')
 
+# Validate the trained model on the test set
+metrics = model.val()
+# Access the results dictionary
+results = metrics.results_dict
+
+# Extract precision, recall, mAP50, and mAP50-95 values
+precision = results['metrics/precision(B)']  # Precision
+recall = results['metrics/recall(B)']          # Recall
+mAP50 = results['metrics/mAP50(B)']            # mAP at IoU=0.50
+mAP50_95 = results['metrics/mAP50-95(B)']      # mAP at IoU=0.50 to 0.95
+
+print(f'Precision: {precision:.3f}, Recall: {recall:.3f}, mAP50: {mAP50:.3f}, mAP50-95: {mAP50_95:.3f}')
+
 
